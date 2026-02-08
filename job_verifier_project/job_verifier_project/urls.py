@@ -8,5 +8,3 @@ urlpatterns = [
     path('', include('main_app.urls')),
 ]
 
-# ✅ THIS LINE IS CRITICAL FOR RENDER FREE
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
