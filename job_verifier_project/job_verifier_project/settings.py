@@ -138,13 +138,11 @@ USE_TZ = True
 # =========================
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'job_verifier_project' / 'static',
-]
 
 
 
-S
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
