@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="predict-page">
+    <div class="container">
+        <h2>Check a Job Posting</h2>
+
+        {% if result %}
+            <div class="results-container" style="padding: 20px; border: 1px solid #ccc; border-radius: 10px; margin-bottom: 30px; background-color: #f8f9fa;">
+                <h3>Analysis Result</h3>
+                {% if result.prediction == "Fake Job" %}
+                    <h4 style="color: #dc3545;">🚨 Prediction: {{ result.prediction }}</h4>
+                    <p><strong>Confidence (Probability of being fake):</strong> {{ result.probability|floatformat:2 }}</p>
+                    <p style="color: #ffc107;"><strong>Be Cautious:</strong> This job posting shows strong characteristics of fraudulent listings.</p>
+                {% else %}
+                    <h4 style="color: #28a745;">✅ Prediction: {{ result.prediction }}</h4>
+                    <p><strong>Confidence (Probability of being fake):</strong> {{ result.probability|floatformat:2 }}</p>
+                    <p style="color: #17a2b8;"><strong>Looks Good:</strong> This job posting appears to be legitimate based on our analysis.</p>
+                {% endif %}
+            </div>
+        {% elif error %}
+            <div class="error-container" style="padding: 10px; background-color: #f8d7da; color: #721c24; border-radius: 5px; margin-bottom: 30px;">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+        <div class="form-container">
+            <div class="tabs">
+                <button class="tab-link active" onclick="openTab(event, 'paste-text')">Paste Text</button>
+                <button class="tab-link" onclick="openTab(event, 'upload')">Upload Resume/Image</button>
+                <button class="tab-link" onclick="openTab(event, 'live')">Live Screen Analysis</button>
+            </div>
+
+            <form action="{% url 'predict' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="paste-text" class="tab-content active">
+                    <textarea name="job_description" placeholder="Paste the job description here..."></textarea>
+                </div>
+
+                <div id="upload" class="tab-content">
+                    <input type="file" name="uploaded_file">
+                </div>
+
+                <div id="live" class="tab-content">
+                    <p>This feature is coming soon.</p>
+                    <button type="button" disabled>Start Analysis</button>
+                </div>
+
+                <button type="submit" class="btn">Analyze Now!</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Your script is correct, but let's make sure the active tab's content is visible on page load
+document.addEventListener("DOMContentLoaded", function() {
+    // Hide all tab content first
+    var tabcontent = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    // Then show the one marked 'active'
+    document.querySelector('.tab-content.active').style.display = 'block';
+});
+</script>
+{% endblock %}

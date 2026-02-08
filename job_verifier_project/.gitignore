@@ -1,0 +1,5 @@
+Models/
+*.pth
+*.pkl
+*.txt
+*.zip

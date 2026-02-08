@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-history" id="chat-history">
+        <div class="chat-message agent">
+            <div class="chat-bubble">
+                Hello! I'm your career agent. To get started, please upload your resume and tell me what kind of job you're looking for.
+            </div>
+        </div>
+    </div>
+    <div class="chat-input-area">
+        <label for="resume-upload" class="upload-btn">
+            <i class="fas fa-paperclip"></i>
+        </label>
+        <input type="file" id="resume-upload" hidden>
+        <span id="file-name"></span>
+        <input type="text" id="user-input" placeholder="e.g., Find remote software engineer roles...">
+        <button id="send-btn" class="send-btn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const chatHistory = document.getElementById("chat-history");
+    const userInput = document.getElementById("user-input");
+    const sendBtn = document.getElementById("send-btn");
+    const resumeUpload = document.getElementById("resume-upload");
+    const fileName = document.getElementById("file-name");
+
+    sendBtn.addEventListener("click", function() {
+        const userMessage = userInput.value;
+        if (userMessage.trim() !== "") {
+            appendMessage(userMessage, "user");
+            userInput.value = "";
+            showThinkingIndicator();
+            setTimeout(showMockResponse, 2000);
+        }
+    });
+
+    resumeUpload.addEventListener("change", function() {
+        if (resumeUpload.files.length > 0) {
+            fileName.textContent = resumeUpload.files[0].name;
+        }
+    });
+
+    function appendMessage(message, sender) {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("chat-message", sender);
+        messageElement.innerHTML = `<div class="chat-bubble">${message}</div>`;
+        chatHistory.appendChild(messageElement);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    function showThinkingIndicator() {
+        const thinkingElement = document.createElement("div");
+        thinkingElement.classList.add("chat-message", "agent");
+        thinkingElement.id = "thinking-indicator";
+        thinkingElement.innerHTML = `<div class="chat-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+        chatHistory.appendChild(thinkingElement);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    function removeThinkingIndicator() {
+        const thinkingIndicator = document.getElementById("thinking-indicator");
+        if (thinkingIndicator) {
+            thinkingIndicator.remove();
+        }
+    }
+
+    function showMockResponse() {
+        removeThinkingIndicator();
+        const mockJobCard = `
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h4>Software Engineer</h4>
+                    <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified Real</span>
+                </div>
+                <p><strong>Company:</strong> Tech Solutions Inc.</p>
+                <p><strong>Location:</strong> Remote</p>
+                <p class="agent-note"><em>This looks like a strong match for your Python skills.</em></p>
+                <a href="#" class="btn">View Details & Apply</a>
+            </div>
+        `;
+        appendMessage(mockJobCard, "agent");
+    }
+});
+</script>
+{% endblock %}
