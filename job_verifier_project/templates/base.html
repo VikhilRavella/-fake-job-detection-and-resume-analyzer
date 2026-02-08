@@ -5,34 +5,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Verifier</title>
+
+    <!-- Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- ✅ INLINE CSS (Render Free SAFE) -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        nav {
+            background: linear-gradient(90deg, #1c3d5a, #007bff);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 1rem;
+        }
+
+        nav ul li a,
+        nav ul li span {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        .btn {
+            background-color: #ff4b5c;
+            color: white;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #ff1c2e;
+        }
+
+        .motivation {
+            background-color: #1c3d5a;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .job-portals {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: space-around;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 280px;
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: #007bff;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 3rem;
+        }
+    </style>
 </head>
+
 <body>
-    <nav>
-        <div class="container">
-            <a href="{% url 'home' %}" class="brand">Job Verifier</a>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><span style="color:gray;cursor:not-allowed">Predict (Hold)</span></li>
-<li><span style="color:gray;cursor:not-allowed">AI Agent (Hold)</span></li>
 
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav>
+    <div class="container">
+        <a href="{% url 'home' %}" class="brand">Job Verifier</a>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><span style="color:lightgray;cursor:not-allowed">Predict (Hold)</span></li>
+            <li><span style="color:lightgray;cursor:not-allowed">AI Agent (Hold)</span></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+<main>
+    {% block content %}{% endblock %}
+</main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Job Verifier. All Rights Reserved.</p>
-        </div>
-    </footer>
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Job Verifier. All Rights Reserved.</p>
+    </div>
+</footer>
+
 </body>
 </html>
