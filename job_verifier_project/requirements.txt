@@ -21,6 +21,9 @@ numpy
 
 # OCR
 pytesseract
+PyMuPDF
+Pillow
+
 Pillow
 python-dotenv
 
