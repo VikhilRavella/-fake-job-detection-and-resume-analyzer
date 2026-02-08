@@ -1,4 +1,4 @@
-import json
+"""import json
 import asyncio
 import os
 from dotenv import load_dotenv
@@ -195,3 +195,6 @@ async def agent_view(request):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Invalid request method.'}, status=405)
+
+    """
+    # ML imports disabled for Render free-tier stability
