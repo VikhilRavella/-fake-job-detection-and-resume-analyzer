@@ -232,7 +232,20 @@ def contact(request):
     return render(request, "contact.html")
 
 def predict(request):
-    return render(request, "predict.html")
+    context = {}
+
+    if request.method == "POST":
+        job_text = request.POST.get("job_description", "")
+
+        if job_text.strip():
+            context["result"] = {
+                "prediction": "Demo Mode",
+                "probability": 0.00
+            }
+        else:
+            context["error"] = "Please paste a job description."
+
+    return render(request, "predict.html", context)
 
 def agent(request):
     return render(request, "agent.html")
