@@ -230,3 +230,9 @@ def about(request):
 
 def contact(request):
     return render(request, "contact.html")
+
+def predict(request):
+    return render(request, "predict.html")
+
+def agent(request):
+    return render(request, "agent.html")
