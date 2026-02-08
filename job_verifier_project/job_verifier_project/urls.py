@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # 🔴 Disable API routes (ML related) for free-tier stability
-    # path('api/', include('main_app.api_urls')),
-
-    # ✅ Enable normal web pages only
     path('', include('main_app.urls')),
 ]
+
+# ✅ THIS LINE IS CRITICAL FOR RENDER FREE
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
