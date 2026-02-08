@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-qsr270=nu&txu1+d0^bx(mtlv90)dm4^bkiuf)p5*myw3a5f$3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [  "localhost",
+    "127.0.0.1",
+    "fake-job-detection-and-resume-analyzer.onrender.com",
+    ".onrender.com",]
 
 
 # Application definition
