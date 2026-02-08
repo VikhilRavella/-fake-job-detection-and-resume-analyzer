@@ -1,0 +1,25 @@
+# Django
+django
+djangorestframework
+django-cors-headers
+gunicorn
+
+# ML / Deep Learning
+torch
+torchtext
+sentence-transformers
+scikit-learn
+joblib
+
+# NLP
+spacy
+nltk
+
+# Data
+pandas
+numpy
+
+# OCR
+pytesseract
+Pillow
+
